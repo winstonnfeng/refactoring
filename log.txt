@@ -1,4 +1,6 @@
-404df15 (HEAD -> main) Completed Task 2.2
+b9a435b (HEAD -> main) Completed Task 2.4
+b7f0ecd Completed Task 2.3
+404df15 Completed Task 2.2
 45521cb Completed Task 2.1
 97048a7 (origin/main, origin/HEAD) Completed Task 1.2
 da3f01d Completed Task 1.1
