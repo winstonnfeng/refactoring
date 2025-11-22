@@ -11,7 +11,7 @@ public class StatementPrinter {
     private final Invoice invoice;
     private final Map<String, Play> plays;
 
-    public StatementPrinter(Invoice invoice, Map<String, Play> plays) {
+    public StatementPrinter(final Invoice invoice, final Map<String, Play> plays) {
         this.invoice = invoice;
         this.plays = plays;
     }
@@ -30,13 +30,8 @@ public class StatementPrinter {
         final NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
 
         for (Performance performance : invoice.getPerformances()) {
-
             // add volume credits
-            volumeCredits += Math.max(performance.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
-            // add extra credit for every five comedy attendees
-            if ("comedy".equals(getPlay(performance).getType())) {
-                volumeCredits += performance.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
-            }
+            volumeCredits += getVolumeCredits(performance);
 
             // print line for this order
             result.append(String.format("  %s: %s (%s seats)%n",
@@ -76,6 +71,17 @@ public class StatementPrinter {
                 break;
             default:
                 throw new RuntimeException(String.format("unknown type: %s", this.getPlay(performance).getType()));
+        }
+        return result;
+    }
+
+    private int getVolumeCredits(final Performance performance) {
+        int result = 0;
+        result += Math.max(performance.getAudience()
+                - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
+        // add extra credit for every five comedy attendees
+        if ("comedy".equals(this.getPlay(performance).getType())) {
+            result += performance.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
         }
         return result;
     }

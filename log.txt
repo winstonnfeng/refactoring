@@ -1,3 +1,4 @@
-97048a7 (HEAD -> main, origin/main, origin/HEAD) Completed Task 1.2
+45521cb (HEAD -> main) Completed Task 2.1
+97048a7 (origin/main, origin/HEAD) Completed Task 1.2
 da3f01d Completed Task 1.1
 29ad362 Initial commit
